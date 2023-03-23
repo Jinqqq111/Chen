@@ -122,10 +122,11 @@ def get_qinghua():
     data = result.decode('utf-8')
     dict_data = json.loads(data)
     print(dict_data)
-    return qinghua
+    sentence = dict_data
+    return sentence
  
  
-def send_message(to_user, access_token, region_name, weather, temp, feelsLike, vis, precip, wind_dir, pressure, qinghua):
+def send_message(to_user, access_token, region_name, weather, temp, feelsLike, vis, precip, wind_dir, pressure, sentence):
     url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token={}".format(access_token)
     week_list = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
     year = localtime().tm_year
@@ -248,5 +249,5 @@ if __name__ == "__main__":
     
     # 公众号推送消息
     for user in users:
-        send_message(user, accessToken, region, weather, temp, feelsLike, vis, precip, wind_dir, pressure, qinghua)
+        send_message(user, accessToken, region, weather, temp, feelsLike, vis, precip, wind_dir, pressure, sentence)
     os.system("pause")
