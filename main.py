@@ -122,7 +122,7 @@ def get_qinghua():
     data = result.decode('utf-8')
     dict_data = json.loads(data)
     print(dict_data)
-    sentence = dict_data
+    "sentence" = "content"
     return sentence
  
  
