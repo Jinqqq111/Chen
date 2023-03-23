@@ -248,5 +248,5 @@ if __name__ == "__main__":
     
     # 公众号推送消息
     for user in users:
-        send_message(user, accessToken, region, weather, temp, feelsLike, vis, precip, wind_dir, pressure, dict_data)
+        send_message(user, accessToken, region, weather, temp, feelsLike, vis, precip, wind_dir, pressure, qinghua)
     os.system("pause")
