@@ -122,7 +122,7 @@ def get_qinghua():
     data = result.decode('utf-8')
     dict_data = json.loads(data)
     print(dict_data)
-    "sentence" = "content"
+    sentence = r.json()["content"]
     return sentence
  
  
@@ -246,7 +246,10 @@ if __name__ == "__main__":
     # 传入地区获取天气信息
     region = config["region"]
     weather, temp, feelsLike, vis, precip, wind_dir, pressure = get_weather(region)
-    
+     sentence = config["sentence"]
+    if sentence == ""
+        # 获取
+        sentence = get_qinghua()
     # 公众号推送消息
     for user in users:
         send_message(user, accessToken, region, weather, temp, feelsLike, vis, precip, wind_dir, pressure, sentence)
