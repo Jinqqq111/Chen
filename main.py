@@ -245,7 +245,7 @@ if __name__ == "__main__":
     region = config["region"]
     weather, temp, feelsLike, vis, precip, wind_dir, pressure = get_weather(region)
     love = config["love"]
-    if note_ch == ""
+    if love == ""
         # 获取词霸每日金句
         love = get_love()
     # 公众号推送消息
