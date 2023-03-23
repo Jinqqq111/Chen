@@ -111,19 +111,20 @@ def get_birthday(birthday, year, today):
     return birth_day
  
  
-def get_ciba():
-    url = "https://res.abeim.cn/api-text_sweet"
-    headers = {
-        'Content-Type': 'application/json',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
-                      'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36'
-    }
-    r = get(url, headers=headers)
-    note_en = r.json()["content"]
-    return note_en
+def get_qinghua():
+    conn = http.client.HTTPSConnection('apis.tianapi.com')  #接口域名
+    params = urllib.parse.urlencode({'key':'819539a45f8b60ab375c976db5d6fd9b'})
+    headers = {'Content-type':'application/x-www-form-urlencoded'}
+    conn.request('POST','/saylove/index',params,headers)
+    tianapi = conn.getresponse()
+    result = tianapi.read()
+    data = result.decode('utf-8')
+    dict_data = json.loads(data)
+    print(dict_data)
+    return dict_data
  
  
-def send_message(to_user, access_token, region_name, weather, temp, feelsLike, vis, precip, wind_dir, pressure, note_en):
+def send_message(to_user, access_token, region_name, weather, temp, feelsLike, vis, precip, wind_dir, pressure, dict_data):
     url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token={}".format(access_token)
     week_list = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
     year = localtime().tm_year
@@ -189,16 +190,6 @@ def send_message(to_user, access_token, region_name, weather, temp, feelsLike, v
             "love_day": {
                 "value": love_days,
                 "color": get_color()
-            },
-            "note_en": {
-                "value": note_en,
-                "color": get_color()
-
-            },
-            "note_ch": {
-                "value": note_ch,
-                "color": get_color()
-
             }
         }
     }
@@ -249,12 +240,8 @@ if __name__ == "__main__":
     # 传入地区获取天气信息
     region = config["region"]
     weather, temp, feelsLike, vis, precip, wind_dir, pressure = get_weather(region)
-    note_en = config["note_en"]
-    if note_en == "":
-        # 获取词霸每日金句
-        note_en = get_ciba()
-
+    
     # 公众号推送消息
     for user in users:
-        send_message(user, accessToken, region, weather, temp, feelsLike, vis, precip, wind_dir, pressure, note_en)
+        send_message(user, accessToken, region, weather, temp, feelsLike, vis, precip, wind_dir, pressure, dict_data)
     os.system("pause")
