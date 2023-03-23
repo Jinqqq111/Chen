@@ -193,7 +193,7 @@ def send_message(to_user, access_token, region_name, weather, temp, feelsLike, v
                 "value": love_days,
                 "color": get_color()
              },
-            "qinghua": {
+            "sentence": {
                 "value": dict_data,
                 "color": get_color()
             }
