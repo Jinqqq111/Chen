@@ -122,10 +122,10 @@ def get_qinghua():
     data = result.decode('utf-8')
     dict_data = json.loads(data)
     print(dict_data)
-    return dict_data
+    return qinghua
  
  
-def send_message(to_user, access_token, region_name, weather, temp, feelsLike, vis, precip, wind_dir, pressure, dict_data):
+def send_message(to_user, access_token, region_name, weather, temp, feelsLike, vis, precip, wind_dir, pressure, qinghua):
     url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token={}".format(access_token)
     week_list = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"]
     year = localtime().tm_year
@@ -192,7 +192,7 @@ def send_message(to_user, access_token, region_name, weather, temp, feelsLike, v
                 "value": love_days,
                 "color": get_color()
              },
-            "dict_data": {
+            "qinghua": {
                 "value": dict_data,
                 "color": get_color()
             }
